@@ -1,0 +1,85 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : ilker OKUR                                        *
+'*  Notice  : Copyright (c) 2018 ilker OKUR                     *
+'*          : All Rights Reserved                               *
+'*  Date    : 4.07.2018                                         *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+
+@__CONFIG _MCLRE_OFF & _XT_OSC & _WDT_ON & _PWRTE_ON & _CP_OFF & _LVP_OFF
+CMCON=7
+INCLUDE "modedefs.bas"
+DEFINE OSC 4
+
+TRISA=1
+TRISB=0
+PORTA=0
+PORTB=0
+RX VAR BYTE
+
+BASLA
+RX=0
+SERIN PORTA.0,T2400,["X"],RX
+
+SELECT CASE RX
+
+
+
+CASE 8           '* geri
+
+LOW PORTB.0
+HIGH PORTB.1 
+LOW PORTB.2
+HIGH PORTB.3
+ 
+CASE 7              '* sag
+
+HIGH PORTB.0
+LOW PORTB.1
+LOW PORTB.2
+HIGH PORTB.3
+
+CASE 6
+
+LOW PORTB.0
+HIGH PORTB.1
+HIGH PORTB.2
+LOW PORTB.3
+
+CASE 5         '* ÝLERÝ
+
+HIGH PORTB.0
+LOW PORTB.1 
+HIGH PORTB.2
+LOW PORTB.3
+            
+CASE 4 
+
+HIGH PORTB.4
+LOW PORTB.5
+
+CASE 3
+
+LOW PORTB.4
+HIGH PORTB.5
+
+CASE 2
+
+HIGH PORTB.6
+
+case ELSE
+LOW PORTB.0
+LOW PORTB.1 
+LOW PORTB.2
+LOW PORTB.3
+LOW PORTB.4
+LOW PORTB.5
+LOW PORTB.6
+
+END SELECT
+
+GOTO BASLA
+END
